@@ -1,0 +1,11 @@
+{
+    "author": ["{{Gianna}}"],
+    "install_msg": "",
+    "name": "{{Giveaways}}",
+    "disabled": false,
+    "short": "",
+    "description": "{{Giveaways}}",
+    "tags": [],
+    "requirements": [],
+    "hidden": false
+}
