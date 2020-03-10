@@ -1,6 +1,5 @@
 from .giveaways import Giveaways
 
 
-def setup(bot):
-    cog = {{Giveaways}}(bot)
-    bot.add_cog(Giveaways)
+async def setup(bot):
+    bot.add_cog(Giveaways(bot))
