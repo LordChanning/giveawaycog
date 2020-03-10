@@ -1,12 +1,13 @@
 import discord
 from discord.ext import tasks, commands
+from redbot.core import commands, checks
+from redbot.core.config import Config
 
 import asyncio
 from datetime import datetime, date
 import time
 import random
 
-from redbot.core import commands
 
 def findN(string, n, item=':'):
     '''For example, if n = 3, this will find the third occurence of {item} (throughout this program, {item} will be ':') in the string, and return it's index.'''
