@@ -54,7 +54,7 @@ class Boxes(commands.Cog):
         ]
 
     
-    # @commands.has_role(676168399713206292 or 696060132479598604)
+    @commands.has_any_role(480665931974967296, 471924170213556224)
     @commands.group()
     async def box(self, ctx):
 
