@@ -10,7 +10,6 @@ class Boxes(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.read = ""
         self.num1 = 1
         self.num2 = 100
         self.prizeLevel1 = [
@@ -53,7 +52,7 @@ class Boxes(commands.Cog):
             "Astro A40s"
         ]
 
-    
+
     @commands.has_any_role(480665931974967296, 471924170213556224)
     @commands.group()
     async def box(self, ctx):
@@ -97,50 +96,66 @@ class Boxes(commands.Cog):
 
 
     @box.command()
-    async def remove(self, ctx, *, prize):
+    async def add(self, ctx, prizelevel, *, prize):
 
-        if prize in self.prizeLevel1:
+        if int(prizelevel) == 1:
+            self.prizeLevel1.append(prize)
+            await ctx.send(f"**{prize}** has been added to prize level **{prizelevel}**")
+
+        elif int(prizelevel) == 2:
+            self.prizeLevel2.append(prize)
+            await ctx.send(f"**{prize}** has been added to prize level **{prizelevel}**")
+
+        elif int(prizelevel) == 3:
+            self.prizeLevel3.append(prize)
+            await ctx.send(f"**{prize}** has been added to prize level **{prizelevel}**")
+
+        else:
+            await ctx.send(f"use the read subcommand i made it for a reason")
+
+
+    @box.command()
+    async def remove(self, ctx, prizelevel, *, prize):
+
+        if int(prizelevel) == 1 and prize in self.prizeLevel1:
             self.prizeLevel1.remove(prize)
-            await ctx.send(f"{prize} has been removed from prize level 1")
+            await ctx.send(f"**{prize}** has been removed from prize level **{prizelevel}**")
 
-        elif prize in self.prizeLevel2:
+        elif int(prizelevel) == 2 and prize in self.prizeLevel2:
             self.prizeLevel2.remove(prize)
-            await ctx.send(f"{prize} has been removed from prize level 2")
+            await ctx.send(f"**{prize}** has been removed from prize level **{prizelevel}**")
 
-        elif prize in self.prizeLevel3:
+        elif int(prizelevel) == 3 and prize in self.prizeLevel3:
             self.prizeLevel3.remove(prize)
-            await ctx.send(f"{prize} has been removed from prize level 3")
+            await ctx.send(f"**{prize}** has been removed from prize level **{prizelevel}**")
+
+        elif prize not in self.prizeLevel1 or prize not in self.prizeLevel2 or prize not in self.prizeLevel3:
+            await ctx.send("do you not listen what the frick channing")
 
 
     @box.command()
     async def read(self, ctx, *, prizelevel):
 
         if int(prizelevel) == 1:
-            self.read = ""
-
+            read = ""
             for string in self.prizeLevel1:
-                self.read += f"{string}\n"
-
-            await ctx.send(self.read)
+                read += f"{string}\n"
+            await ctx.send(read)
 
         elif int(prizelevel) == 2:
-            self.read = ""
-
+            read = ""
             for string in self.prizeLevel2:
-                self.read += f"{string}\n"
-
-            await ctx.send(self.read)
+                read += f"{string}\n"
+            await ctx.send(read)
 
         elif int(prizelevel) == 3:
-            self.read = ""
-
+            read = ""
             for string in self.prizeLevel3:
-                self.read += f"{string}\n"
-
-            await ctx.send(self.read)
+                read += f"{string}\n"
+            await ctx.send(read)
 
         else:
-            await ctx.send(f"Prize level {prizelevel} does not exist. Available prize levels are 1, 2, and 3.")
+            await ctx.send(f"learn your prize levels you dumb heck")
 
 
 
