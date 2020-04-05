@@ -1,10 +1,10 @@
 {
-    "author": ["{{Gianna}}", "{{Joey}}"],
+    "author": ["{{Gianna}}"],
     "install_msg": "",
-    "name": "{{Giveaways}}",
+    "name": "{{Boxes}}",
     "disabled": false,
     "short": "",
-    "description": "{{Giveaways}}",
+    "description": "{{Loot boxes for events}}",
     "tags": [],
     "requirements": [],
     "hidden": false
