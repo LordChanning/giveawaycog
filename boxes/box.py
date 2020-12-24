@@ -159,6 +159,7 @@ class Boxes(commands.Cog):
         else:
             await ctx.send(f"learn your prize levels you dumb heck")
 
+
     @box.command()
     async def event(self, ctx, *, event):
 
