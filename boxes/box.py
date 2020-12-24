@@ -10,6 +10,7 @@ class Boxes(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.event = ""
         self.num1 = 1
         self.num2 = 100
         self.prizeLevel1 = [
@@ -44,16 +45,11 @@ class Boxes(commands.Cog):
             "a reroll"
         ]
         
-        self.prizeLevel3 = [
-            "a Tangerine Orange role",
-            "a Lime Green role",
-            "a Sky Blue role",
-            "a choice of either a Discord Blurple or Discord Black role",
-            "Astro A40s"
-        ]
+        self.prizeLevel3 = []
 
 
     @commands.has_any_role(480665931974967296, 471924170213556224)
+    @commands.has_permission("administrator")
     @commands.group()
     async def box(self, ctx):
 
@@ -71,28 +67,34 @@ class Boxes(commands.Cog):
             num = random.randint(self.num1, self.num2)
 
             if num > 0 and num < 60:
-                await ctx.send(f"{user.mention} You have gotten **{random.choice(self.prizeLevel1)}** from your Easter Loot Box!")
+                await ctx.send(f"{user.mention} You have gotten **{random.choice(self.prizeLevel1)}** from your {self.event} Loot Box!")
 
             if num >= 60 and num < 85:
                 var = random.choice(self.prizeLevel2)
 
                 if var == "empty":
-                    await ctx.send(f"{user.mention} Your Easter Loot Box was {var} :(")
+                    await ctx.send(f"{user.mention} Your {self.event} Loot Box was {var} :(")
 
                 else:
-                    await ctx.send(f"{user.mention} You have gotten **{var}** from your Easter Loot Box!")
+                    await ctx.send(f"{user.mention} You have gotten **{var}** from your {self.event} Loot Box!")
 
                 if var == "a reroll":
                     reroll = True
 
             if num >= 85 and num <= 100:
-                if num >= 85 and num <= 95:
-                    await ctx.send(f"{user.mention} You have gotten **{random.choice(self.prizeLevel3[:-1])}** from your Easter Loot Box!")
+                if "Astro A40s" in self.prizeLevel3:
+                    del self.prizeLevel3[self.prizeLevel3.index("Astro A40s")]
+                    self.prizeLevel3.append("Astro A40s")
 
-                elif num > 95 and num <= 100:
-                    await ctx.send(f"{user.mention} You have gotten **{self.prizeLevel3[-1]}** from your Easter Loot Box!")
-                    self.prizeLevel3.remove("Astro A40s")
-                    self.num2 = 95
+                    if num >= 85 and num <= 95:
+                        await ctx.send(f"{user.mention} You have gotten **{random.choice(self.prizeLevel3[:-1])}** from your {self.event} Loot Box!")
+
+                    elif num > 95 and num <= 100:
+                        await ctx.send(f"{user.mention} You have gotten **{self.prizeLevel3[-1]}** from your {self.event} Loot Box!")
+                        self.prizeLevel3.remove("Astro A40s")
+
+                else:
+                    await ctx.send(f"{user.mention} You have gotten **{random.choice(self.prizeLevel3)}** from your {self.event} Loot Box!")
 
 
     @box.command()
@@ -157,6 +159,11 @@ class Boxes(commands.Cog):
         else:
             await ctx.send(f"learn your prize levels you dumb heck")
 
+    @box.command()
+    async def event(self, ctx, *, event):
+
+        self.event = event
+        await ctx.send(f"The event has been updated to **{event}**")
 
 
 def setup(bot):
