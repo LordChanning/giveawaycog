@@ -47,9 +47,6 @@ class Boxes(commands.Cog):
         
         self.prizeLevel3 = []
 
-
-    @commands.has_any_role(480665931974967296, 471924170213556224)
-    @commands.has_permission("administrator")
     @commands.group()
     async def box(self, ctx):
 
